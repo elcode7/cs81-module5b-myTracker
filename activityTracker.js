@@ -65,3 +65,47 @@ const myWeek = [
     timeOfDay: "afternoon"
   }
 ];
+
+// Analysis Functions
+// ===============================
+
+// 1. Total hours spent on physical activities
+const totalPhysicalHours = myWeek
+  .filter(act => act.category === "physical")
+  .reduce((sum, act) => sum + act.hoursSpent, 0);
+
+console.log("Total hours spent on physical activities:", totalPhysicalHours);
+
+// 2. Average enjoyment for evening activities
+const eveningActivities = myWeek.filter(
+  act => act.timeOfDay === "evening"
+);
+
+const avgEveningEnjoyment =
+  eveningActivities.reduce((sum, act) => sum + act.enjoyment, 0) /
+  eveningActivities.length;
+
+console.log("Average evening enjoyment:", avgEveningEnjoyment.toFixed(1));
+
+// 3. Most common activity category
+const categoryCounts = myWeek.reduce((counts, act) => {
+  counts[act.category] = (counts[act.category] || 0) + 1;
+  return counts;
+}, {});
+
+const mostCommonCategory = Object.keys(categoryCounts).reduce((a, b) =>
+  categoryCounts[a] > categoryCounts[b] ? a : b
+);
+
+console.log("Most common category:", mostCommonCategory);
+
+// 4. Low-effort, high-enjoyment activities
+const lowEffortHighEnjoyment = myWeek
+  .filter(act => act.hoursSpent <= 1 && act.enjoyment >= 8)
+  .map(act => act.activity);
+
+console.log(
+  "Low-effort, high-enjoyment activities:",
+  lowEffortHighEnjoyment
+);
+
