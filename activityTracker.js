@@ -109,3 +109,15 @@ console.log(
   lowEffortHighEnjoyment
 );
 
+// 4. Custom Higher-Order Function
+// ===============================
+
+function filterByCondition(testFn) {
+  return myWeek.filter(testFn);
+}
+
+const shortAndFun = filterByCondition(
+  act => act.hoursSpent < 1 && act.enjoyment > 8
+);
+
+console.log("Custom HOF result:", shortAndFun);
